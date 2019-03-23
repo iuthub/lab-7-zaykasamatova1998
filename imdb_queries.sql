@@ -1,8 +1,8 @@
-SELECT name FROM `movies` WHERE year=1995
-SELECT COUNT(*) from roles where movie_id in(SELECT id from movies where name="Lost in Translation")
-SELECT first_name,last_name FROM roles A LEFT JOIN actors B ON A.actor_id = B.id
-SELECT first_name,last_name FROM directors WHERE directors.id in (SELECT director_id FROM movies_directors WHERE movies_directors.movie_id in (SELECT id FROM movies WHERE name="Fight Club"))
-SELECT COUNT(*) from movies_directors where director_id in (SELECT id FROM directors WHERE first_name="Clint" AND last_name="Eastwood")
-SELECT name FROM movies WHERE id in (SELECT movie_id from movies_directors where director_id in (SELECT id FROM directors WHERE first_name="Clint" AND last_name="Eastwood"))
-SELECT first_name, last_name from directors where id in(SELECT director_id FROM directors_genres WHERE genre="Horror")
-SELECT first_name, last_name FROM actors where id IN(SELECT actor_id from roles where movie_id in(SELECT movie_id FROM movies_directors where director_id in(SELECT id FROM directors where first_name="Christopher" and last_name="Nolan")))
+SELECT * FROM `movies` WHERE year>=1995;
+SELECT COUNT(*) FROM actors a JOIN roles r ON a.id=r.actor_id JOIN movies m ON r.movie_id=m.id WHERE m.name="Lost in Translation";
+SELECT a.first_name, a.last_name FROM actors a JOIN roles r ON a.id=r.actor_id JOIN movies m ON r.movie_id=m.id WHERE m.name="Lost in Translation";
+SELECT d.first_name, d.last_name FROM directors d JOIN movies_directors md ON d.id=md.director_id JOIN movies m ON md.movie_id=m.id WHERE m.name="Fight Club";
+SELECT COUNT(*) FROM movies m JOIN movies_directors md ON m.id=md.movie_id JOIN directors d ON md.director_id=d.id WHERE d.first_name="Clint";
+SELECT m.name FROM movies m JOIN movies_directors md ON m.id=md.movie_id JOIN directors d ON md.director_id=d.id WHERE d.first_name="Clint";
+SELECT d.first_name FROM directors d JOIN directors_genres dg ON d.id=dg.director_id WHERE dg.genre="Horror";
+SELECT a.first_name, a.last_name FROM actors a JOIN roles r ON a.id=r.actor_id JOIN movies m ON m.id=r.movie_id JOIN movies_directors md ON md.movie_id=m.id JOIN directors d ON d.id=md.director_id WHERE d.first_name="Christopher";
