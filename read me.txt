@@ -1,4 +1,4 @@
 Lab-7
-group: 004
-ID:    U1610038
-Name:  Aziza Abdurakhmonova
+group: 002
+ID:    U1710289
+Name:  Ziyoda Samatova
